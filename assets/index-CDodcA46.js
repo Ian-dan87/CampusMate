@@ -1,4 +1,4 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e={Home:`
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=document.querySelector(`#app`),t={Home:`
     <section class="welcome">
       <p>Welcome back 👋</p>
       <h1>Ian Dancan</h1>
@@ -13,14 +13,14 @@
 
     <h2>Student Services</h2>
     <section class="grid">
-      ${t(`📚`,`Academics`,`Units, notes & past papers`,`Academics`)}
-      ${t(`🗓️`,`Timetable`,`View your class schedule`,`Timetable`)}
-      ${t(`📝`,`Assignments`,`Track your deadlines`,`Assignments`)}
-      ${t(`📖`,`My Notes`,`Save your study notes`,`Notes`)}
-      ${t(`💰`,`Budget`,`Track your money`,`Budget`)}
-      ${t(`📢`,`Announcements`,`Campus updates`,`Announcements`)}
-      ${t(`👥`,`Study Groups`,`Learn together`,`Groups`)}
-      ${t(`🛍️`,`Marketplace`,`Buy & sell around campus`,`Marketplace`)}
+      ${n(`📚`,`Academics`,`Units, notes & past papers`,`Academics`)}
+      ${n(`🗓️`,`Timetable`,`View your class schedule`,`Timetable`)}
+      ${n(`📝`,`Assignments`,`Track your deadlines`,`Assignments`)}
+      ${n(`📖`,`My Notes`,`Save your study notes`,`Notes`)}
+      ${n(`💰`,`Budget`,`Track your money`,`Budget`)}
+      ${n(`📢`,`Announcements`,`Campus updates`,`Announcements`)}
+      ${n(`👥`,`Study Groups`,`Learn together`,`Groups`)}
+      ${n(`🛍️`,`Marketplace`,`Buy & sell around campus`,`Marketplace`)}
     </section>
 
     <section class="today">
@@ -106,13 +106,13 @@
 
     <h2>Settings</h2>
     <button class="primary" onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
-  `};function t(e,t,n,r){return`
+  `};function n(e,t,n,r){return`
     <button class="feature" onclick="showSection('${r}')">
       <span class="icon">${e}</span>
       <strong>${t}</strong>
       <small>${n}</small>
     </button>
-  `}function n(){app.innerHTML=`
+  `}function r(){e.innerHTML=`
     <header class="topbar">
       <div>
         <div class="logo">CampusMate <span>KE</span></div>
@@ -121,7 +121,7 @@
       <button class="profile" onclick="showSection('Profile')">👤</button>
     </header>
 
-    <main id="content">${e.Home}</main>
+    <main id="content">${t.Home}</main>
 
     <nav class="bottom">
       <button onclick="showSection('Home')">🏠<span>Home</span></button>
@@ -129,20 +129,20 @@
       <button onclick="showSection('Assignments')">📝<span>Tasks</span></button>
       <button onclick="showSection('Profile')">👤<span>Profile</span></button>
     </nav>
-  `}window.showSection=function(t){document.querySelector(`#content`).innerHTML=e[t]||e.Home,t===`Assignments`&&r(),t===`Notes`&&i(),t===`Budget`&&a()},window.addAssignment=function(){let e=document.querySelector(`#assignmentInput`),t=document.querySelector(`#assignmentDate`);if(!e.value)return alert(`Enter an assignment first.`);let n=JSON.parse(localStorage.getItem(`assignments`)||`[]`);n.push({name:e.value,date:t.value||`No date`}),localStorage.setItem(`assignments`,JSON.stringify(n)),e.value=``,t.value=``,r()};function r(){let e=document.querySelector(`#assignmentList`);if(!e)return;let t=JSON.parse(localStorage.getItem(`assignments`)||`[]`);e.innerHTML=t.length?t.map((e,t)=>`
+  `}window.showSection=function(e){document.querySelector(`#content`).innerHTML=t[e]||t.Home,e===`Assignments`&&i(),e===`Notes`&&a(),e===`Budget`&&o()},window.addAssignment=function(){let e=document.querySelector(`#assignmentInput`),t=document.querySelector(`#assignmentDate`);if(!e.value)return alert(`Enter an assignment first.`);let n=JSON.parse(localStorage.getItem(`assignments`)||`[]`);n.push({name:e.value,date:t.value||`No date`}),localStorage.setItem(`assignments`,JSON.stringify(n)),e.value=``,t.value=``,i()};function i(){let e=document.querySelector(`#assignmentList`);if(!e)return;let t=JSON.parse(localStorage.getItem(`assignments`)||`[]`);e.innerHTML=t.length?t.map((e,t)=>`
       <div class="item">
         <b>📝 ${e.name}</b>
         <small>Deadline: ${e.date}</small>
         <button onclick="deleteAssignment(${t})">Delete</button>
       </div>
-    `).join(``):`<p>No assignments yet.</p>`}window.deleteAssignment=function(e){let t=JSON.parse(localStorage.getItem(`assignments`)||`[]`);t.splice(e,1),localStorage.setItem(`assignments`,JSON.stringify(t)),r()},window.saveNote=function(){let e=document.querySelector(`#noteText`).value.trim();if(!e)return alert(`Write a note first.`);let t=JSON.parse(localStorage.getItem(`notes`)||`[]`);t.push(e),localStorage.setItem(`notes`,JSON.stringify(t)),document.querySelector(`#noteText`).value=``,i()};function i(){let e=document.querySelector(`#notesList`);if(!e)return;let t=JSON.parse(localStorage.getItem(`notes`)||`[]`);e.innerHTML=t.length?t.map((e,t)=>`
+    `).join(``):`<p>No assignments yet.</p>`}window.deleteAssignment=function(e){let t=JSON.parse(localStorage.getItem(`assignments`)||`[]`);t.splice(e,1),localStorage.setItem(`assignments`,JSON.stringify(t)),i()},window.saveNote=function(){let e=document.querySelector(`#noteText`).value.trim();if(!e)return alert(`Write a note first.`);let t=JSON.parse(localStorage.getItem(`notes`)||`[]`);t.push(e),localStorage.setItem(`notes`,JSON.stringify(t)),document.querySelector(`#noteText`).value=``,a()};function a(){let e=document.querySelector(`#notesList`);if(!e)return;let t=JSON.parse(localStorage.getItem(`notes`)||`[]`);e.innerHTML=t.length?t.map((e,t)=>`
       <div class="item">
         <b>📖 Note ${t+1}</b>
         <small>${e}</small>
       </div>
-    `).join(``):`<p>No saved notes yet.</p>`}window.addExpense=function(){let e=document.querySelector(`#expenseName`).value.trim(),t=Number(document.querySelector(`#expenseAmount`).value);if(!e||!t)return alert(`Enter the expense and amount.`);let n=JSON.parse(localStorage.getItem(`expenses`)||`[]`);n.push({name:e,amount:t}),localStorage.setItem(`expenses`,JSON.stringify(n)),document.querySelector(`#expenseName`).value=``,document.querySelector(`#expenseAmount`).value=``,a()};function a(){let e=document.querySelector(`#expenseList`),t=document.querySelector(`#totalExpenses`);if(!e||!t)return;let n=JSON.parse(localStorage.getItem(`expenses`)||`[]`);t.textContent=`KSh ${n.reduce((e,t)=>e+t.amount,0).toLocaleString()}`,e.innerHTML=n.length?n.map(e=>`
+    `).join(``):`<p>No saved notes yet.</p>`}window.addExpense=function(){let e=document.querySelector(`#expenseName`).value.trim(),t=Number(document.querySelector(`#expenseAmount`).value);if(!e||!t)return alert(`Enter the expense and amount.`);let n=JSON.parse(localStorage.getItem(`expenses`)||`[]`);n.push({name:e,amount:t}),localStorage.setItem(`expenses`,JSON.stringify(n)),document.querySelector(`#expenseName`).value=``,document.querySelector(`#expenseAmount`).value=``,o()};function o(){let e=document.querySelector(`#expenseList`),t=document.querySelector(`#totalExpenses`);if(!e||!t)return;let n=JSON.parse(localStorage.getItem(`expenses`)||`[]`);t.textContent=`KSh ${n.reduce((e,t)=>e+t.amount,0).toLocaleString()}`,e.innerHTML=n.length?n.map(e=>`
       <div class="item">
         <b>${e.name}</b>
         <small>KSh ${e.amount.toLocaleString()}</small>
       </div>
-    `).join(``):`<p>No expenses recorded.</p>`}window.toggleTheme=function(){document.body.classList.toggle(`dark`)},n();
+    `).join(``):`<p>No expenses recorded.</p>`}window.toggleTheme=function(){document.body.classList.toggle(`dark`)},r();
